@@ -43,7 +43,7 @@
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function (d) { return d.id; }))
             .force("charge", d3.forceManyBody())
-            .force("center", d3.forceCenter(width / 2, height / 2));
+            .force("center", d3.forceCenter(width / 2, height / 2))
 
         //reads the JSON file
         d3.json("NR6comments.json", function (error, graph) {
