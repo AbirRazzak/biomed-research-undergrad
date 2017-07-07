@@ -17,16 +17,16 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Group 1 Comments</title>
+    <title>Group 3 Comments</title>
     <script src="http://d3js.org/d3.v4.min.js"></script>
 
 </head>
 
 <body>
-    <p> Group 1 Comments </p>
+    <p> Thinking: Group 3 Comments </p>
     <svg width="960" height="600"></svg>
     <script>
-        
+
         //fetches the svg
         var svg = d3.select("svg"),
             width = +svg.attr("width"),
@@ -42,7 +42,7 @@
         //Creates a force simulation
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function (d) { return d.id; }))
-            .force("charge", d3.forceManyBody())
+            .force("charge", d3.forceManyBody().strength(-5000))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         //reads the JSON file

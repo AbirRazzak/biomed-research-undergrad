@@ -15,13 +15,13 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Group 1 Likes</title>
+    <title>Group 3 Likes</title>
     <script src="http://d3js.org/d3.v4.min.js"></script>
 
 </head>
 
 <body>
-    <p> Group 1 Likes </p>
+    <p> Thinking: Group 3 Likes </p>
     <svg width="960" height="600"></svg>
     <script>
 
@@ -40,7 +40,7 @@
         //Creates a force simulation
         var simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(function (d) { return d.id; }))
-            .force("charge", d3.forceManyBody())
+            .force("charge", d3.forceManyBody().strength(-5000))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
         //reads the JSON file
