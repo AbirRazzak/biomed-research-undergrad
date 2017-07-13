@@ -33,7 +33,7 @@
             height = +svg.attr("height");
 
         //Sets a color scale
-        var color = d3.scaleOrdinal(d3.schemeCategory20);
+        var color = d3.scaleOrdinal(d3.schemeCategory10); //!!changed to 10 so 2nd color is orange
 
         var strokeColor = d3.scaleLinear()
             .domain([0, 1, 2])
@@ -48,6 +48,9 @@
         //reads the JSON file
         d3.json("GR1comments.json", function (error, graph) {
             if (error) throw error;
+
+            //display network density
+            document.getElementById("dens").innerHTML = graph.info[0].value;
 
             //sets up the "links" between the nodes
             var link = svg.append("g")
@@ -74,6 +77,10 @@
             //displays the ID number on a node when hovering over
             node.append("title")
                 .text(function (d) { return d.id; });
+
+            //displays the value of the link when hovering over
+            link.append("title")
+                    .text(function (d) { return d.value; });
 
             simulation
                 .nodes(graph.nodes)
@@ -111,7 +118,9 @@
             //d.fx = null;
             //d.fy = null;
         }
+
     </script>
     <p><a href="likes.html">Likes Chart</a></p>
+    <p>Density of Network: <a id=dens>-1</a></p>
 </body>
 </html>

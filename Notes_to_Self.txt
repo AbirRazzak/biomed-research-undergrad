@@ -1,0 +1,32 @@
+This document is meant to keep notes to myself and/or any developer wishing to understand my code.
+
+CHANGING THE COLOR SCALE:
+I changed line 36 to schemeCategory10 from schemeCategory20 so that node group 2 may appear to be orange.
+This will be useful when implementing centrality.
+The new line of code now reads: var color = d3.scaleOrdinal(d3.schemeCategory10)
+
+MAKING NODES DRAG-AND-DROP:
+I commented out 2 lines of code from the dragended(d) function to make the nodes stay put when the user has ended the drag on the nodes.
+This will be useful if the user decides to shape their network in a different way than originally initialized.
+The lines of code for the function now reads:
+function dragended(d) {
+    if (!d3.event.active) simulation.alphaTarget(0);
+    //d.fx = null;
+    //d.fy = null;
+}
+
+
+
+var densityLabel = svg.append("text")
+    .attr("x", 15)
+    .attr("y", 25)
+    .style("font-family", "sans-serif")
+    .style("fill", "red")
+    .style("font-size", "24px")
+    .text("Density = ")
+    .text("5");
+
+
+ STAR Week 3
+    - figured out how to display link values when hovering over (only applied to GR1)
+    - displayed network density

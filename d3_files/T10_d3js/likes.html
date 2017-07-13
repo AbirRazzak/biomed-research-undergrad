@@ -46,7 +46,8 @@
         //reads the JSON file
         d3.json("T10likes.json", function (error, graph) {
             if (error) throw error;
-
+            //display network density
+            document.getElementById("dens").innerHTML = graph.info[0].value;
             //sets up the "links" between the nodes
             var link = svg.append("g")
                 .attr("class", "links")
@@ -111,5 +112,6 @@
         }
     </script>
     <p><a href="index.html">Comments Chart</a></p>
+    <p>Density of Network: <a id=dens>-1</a></p>
 </body>
 </html>
