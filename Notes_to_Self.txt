@@ -30,3 +30,7 @@ var densityLabel = svg.append("text")
  STAR Week 3
     - figured out how to display link values when hovering over (only applied to GR1)
     - displayed network density
+
+STAR Week 4
+  - Changed UI so all graphs are on 1 page
+  - displayed the link values when hovering on all graphs

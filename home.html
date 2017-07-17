@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<style>
+
+    .links line {
+        stroke-opacity: 0.6;
+    }
+
+    .nodes circle {
+        stroke: #fff;
+        stroke-width: 1.5px;
+    }
+
+</style>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Biomed Research Graphs</title>
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+
+</head>
+
+<body>
+    <form method="post">
+        <select id="dropdown" name="dropdown" onchange="changeHiddenInput(this)">
+            <option value="0">Getting Ready Graphs</option>
+            <option value="GR1Comments">GR1Comments</option>
+            <option value="GR1Likes"   >GR1Likes</option>
+            <option value="GR2Comments">GR2Comments</option>
+            <option value="GR2Likes"   >GR2Likes</option>
+            <option value="GR3Comments">GR3Comments</option>
+            <option value="GR3Likes"   >GR3Likes</option>
+            <option value="GR4Comments">GR4Comments</option>
+            <option value="GR4Likes"   >GR4Likes</option>
+            <option value="GR5Comments">GR5Comments</option>
+            <option value="GR5Likes"   >GR5Likes</option>
+            <option value="GR6Comments">GR6Comments</option>
+            <option value="GR6Likes"   >GR6Likes</option>
+            <option value="GR7Comments">GR7Comments</option>
+            <option value="GR7Likes"   >GR7Likes</option>
+            <option value="GR8Comments">GR8Comments</option>
+            <option value="GR8Likes"   >GR8Likes</option>
+            <option value="GR9Comments">GR9Comments</option>
+            <option value="GR9Likes"   >GR9Likes</option>
+        </select>
+        <input type="hidden" name="hiddenInput" id="hiddenInput" value="" />
+    </form>
+
+    <form method="post">
+        <select id="dropdown" name="dropdown" onchange="changeHiddenInput(this)">
+            <option value="0">Not Ready Graphs</option>
+            <option value="NR1Comments">NR1Comments</option>
+            <option value="NR1Likes"   >NR1Likes</option>
+            <option value="NR2Comments">NR2Comments</option>
+            <option value="NR2Likes"   >NR2Likes</option>
+            <option value="NR3Comments">NR3Comments</option>
+            <option value="NR3Likes"   >NR3Likes</option>
+            <option value="NR4Comments">NR4Comments</option>
+            <option value="NR4Likes"   >NR4Likes</option>
+            <option value="NR5Comments">NR5Comments</option>
+            <option value="NR5Likes"   >NR5Likes</option>
+            <option value="NR6Comments">NR6Comments</option>
+            <option value="NR6Likes"   >NR6Likes</option>
+            <option value="NR7Comments">NR7Comments</option>
+            <option value="NR7Likes"   >NR7Likes</option>
+            <option value="NR8Comments">NR8Comments</option>
+            <option value="NR8Likes"   >NR8Likes</option>
+            <option value="NR9Comments">NR9Comments</option>
+            <option value="NR9Likes"   >NR9Likes</option>
+        </select>
+        <input type="hidden" name="hiddenInput" id="hiddenInput" value="" />
+    </form>
+
+    <form method="post">
+        <select id="dropdown" name="dropdown" onchange="changeHiddenInput(this)">
+            <option value="0">Thinking Graphs</option>
+            <option value="T1Comments">T1Comments</option>
+            <option value="T1Likes"   >T1Likes</option>
+            <option value="T2Comments">T2Comments</option>
+            <option value="T2Likes"   >T2Likes</option>
+            <option value="T3Comments">T3Comments</option>
+            <option value="T3Likes"   >T3Likes</option>
+            <option value="T4Comments">T4Comments</option>
+            <option value="T4Likes"   >T4Likes</option>
+            <option value="T5Comments">T5Comments</option>
+            <option value="T5Likes"   >T5Likes</option>
+            <option value="T6Comments">T6Comments</option>
+            <option value="T6Likes"   >T6Likes</option>
+            <option value="T7Comments">T7Comments</option>
+            <option value="T7Likes"   >T7Likes</option>
+            <option value="T8Comments">T8Comments</option>
+            <option value="T8Likes"   >T8Likes</option>
+            <option value="T9Comments">T9Comments</option>
+            <option value="T9Likes"   >T9Likes</option>
+            <option value="T10Comments">T10Comments</option>
+            <option value="T10Likes"   >T10Likes</option>
+            <option value="T11Comments">T11Comments</option>
+            <option value="T11Likes"   >T11Likes</option>
+        </select>
+        <input type="hidden" name="hiddenInput" id="hiddenInput" value="" />
+    </form>
+
+    <button onclick="resetPage()">Reset</button>
+    <button onclick="clearSVG()">Clear</button>
+
+    <! <div id="result"> </div>
+
+    <p id=title> Graph Title Here </p>
+    <svg width="960" height="600"></svg>
+    <script>
+        var select;
+        window.onload = function () {
+            select = document.getElementById('dropdown');
+            console.log(select);
+        }
+
+        function changeHiddenInput(objDropDown) {
+            clearSVG();
+            console.log(objDropDown);
+            var objHidden = document.getElementById("hiddenInput");
+            objHidden.value = objDropDown.value;
+            var a = objHidden.value;
+            load(a);
+            document.getElementById("title").innerHTML = a;
+            result.innerHTML = a || "";
+        }
+
+        function resetPage(){
+            window.location.href = "home.html";
+        }
+
+        function clearSVG(){
+          d3.selectAll("svg > *").remove();
+        }
+
+        function load(filename){
+            //fetches the svg
+            var svg = d3.select("svg"),
+                width = +svg.attr("width"),
+                height = +svg.attr("height");
+
+            //Sets a color scale
+            var color = d3.scaleOrdinal(d3.schemeCategory10); //!!changed to 10 so 2nd color is orange
+
+            var strokeColor = d3.scaleLinear()
+                .domain([0, 1, 2])
+                .range(["white", "red", "green"]);
+
+            //Creates a force simulation
+            var simulation = d3.forceSimulation()
+                .force("link", d3.forceLink().id(function (d) { return d.id; }))
+                .force("charge", d3.forceManyBody().strength(-3000))
+                .force("center", d3.forceCenter(width / 2, height / 2));
+
+            //reads the JSON file
+            d3.json("d3_files/" + filename + ".json", function (error, graph) {
+                if (error) throw error;
+
+                //display network density
+                document.getElementById("dens").innerHTML = graph.info[0].value;
+
+                //sets up the "links" between the nodes
+                var link = svg.append("g")
+                    .attr("class", "links")
+                    .selectAll("line")
+                    .data(graph.links)
+                    .enter().append("line")
+                        .attr("stroke-width", function (d) { return Math.sqrt(d.value) })
+                        .attr("stroke", function (d) { return strokeColor(d.value) });
+
+                //sets up the nodes
+                var node = svg.append("g")
+                    .attr("class", "nodes")
+                    .selectAll("circle")
+                    .data(graph.nodes)
+                    .enter().append("circle")
+                        .attr("r", 10)
+                        .attr("fill", function (d) { return color(d.group); })
+                        .call(d3.drag()
+                            .on("start", dragstarted)
+                            .on("drag", dragged)
+                            .on("end", dragended));
+
+                //displays the ID number on a node when hovering over
+                node.append("title")
+                    .text(function (d) { return d.id; });
+
+                //displays the value of the link when hovering over
+                link.append("title")
+                        .text(function (d) { return d.value; });
+
+                simulation
+                    .nodes(graph.nodes)
+                    .on("tick", ticked);
+
+                simulation.force("link")
+                    .links(graph.links);
+
+                function ticked() {
+                    link
+                        .attr("x1", function (d) { return d.source.x; })
+                        .attr("y1", function (d) { return d.source.y; })
+                        .attr("x2", function (d) { return d.target.x; })
+                        .attr("y2", function (d) { return d.target.y; });
+
+                    node
+                        .attr("cx", function (d) { return d.x; })
+                        .attr("cy", function (d) { return d.y; });
+                }
+            });
+
+            function dragstarted(d) {
+                if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(d) {
+                d.fx = d3.event.x;
+                d.fy = d3.event.y;
+            }
+
+            function dragended(d) {
+                if (!d3.event.active) simulation.alphaTarget(0);
+                //d.fx = null;
+                //d.fy = null;
+            }
+      }
+    </script>
+    <p>Density of Network: <a id=dens>-1</a></p>
+</body>
+</html>
