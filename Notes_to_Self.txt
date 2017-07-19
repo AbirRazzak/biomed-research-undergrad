@@ -34,3 +34,4 @@ var densityLabel = svg.append("text")
 STAR Week 4
   - Changed UI so all graphs are on 1 page
   - displayed the link values when hovering on all graphs
+  - offically gotten rid of TSP Study participants from graphs
