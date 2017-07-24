@@ -1,0 +1,40 @@
+If P is made by “TSP Study” or "Johannes Thrul" or "Danielle Ramo",
+    If P has a hashtag #TDII
+        P is “TDII post"
+    Else If P has a number at the beginning of the post
+        P is “TSP daily posts”
+    Else 
+        P is “TSP other posts”
+Else 
+    P is “User generated posts" 
+    
+
+If "type": "event"
+	P is "Event"
+
+
+    
+Post Types:		
+TDII post
+TDII post like		
+TDII response comment		
+TDII response comment like		
+TSP Daily post		
+TSP Daily post like		
+TSP Daily post response comment		
+TSP Daily post response comment like
+User generated post		
+User generated post like		
+User generated post response comment		
+User generated post response comment like		
+TSP other post	
+TSP other post like		
+TSP other post response comment		
+TSP other post response comment like
+Event		
+
+
+
+****Code*****:
+
+the main codes is in ParseJson.java, please just try to run it and get the right outputs
