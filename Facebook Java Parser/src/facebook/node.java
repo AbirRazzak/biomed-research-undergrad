@@ -17,6 +17,8 @@ public class node {
 	public node(String ID) {
 		// TODO Auto-generated constructor stub
 		name = ID;
+		comment_centrality = -1;
+		like_centrality = -1;
 	}
 	public String getName(){
 		return name;

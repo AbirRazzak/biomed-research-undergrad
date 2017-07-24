@@ -22,14 +22,22 @@ public class network {
 	 */
 	public network() {
 		// TODO Auto-generated constructor stub
-		comment_density = -1;
-		like_density = -1;
+		nodes = new ArrayList<node>();
+		links = new ArrayList<nodeLink>();
+		comment_density = -1.0;
+		like_density = -1.0;
 		g = 0;
 		comment_l = 0;
 		like_l = 0;
 	}
 	public void addNode(node n){
 		nodes.add(n);
+	}
+	public node getNode(int i){
+		return nodes.get(i);
+	}
+	public ArrayList<node> getNodes(){
+		return nodes;
 	}
 	
 	/* 
@@ -57,6 +65,10 @@ public class network {
 		g = nodes.size();
 	}
 
+	public int getG(){
+		return g;
+	}
+	
 	/*
 	 * calculateCommentL - calculates the value of L for the comments network
 	 */
@@ -64,7 +76,7 @@ public class network {
 		int l = 0;
 		
 		for(nodeLink n:links){
-			if(n.commentLink > 0) l++;
+			if(n.getComments() > 0) l++;
 		}
 		
 		comment_l = l;
@@ -77,10 +89,18 @@ public class network {
 		int l = 0;
 		
 		for(nodeLink n:links){
-			if(n.likeLink > 0) l++;
+			if(n.getLikes() > 0) l++;
 		}
 		
 		like_l = l;
+	}
+	
+	public int getCommentL(){
+		return comment_l;
+	}
+	
+	public int getLikeL(){
+		return like_l;
 	}
 	
 	/*
@@ -91,7 +111,7 @@ public class network {
 		calculateG();
 		calculateCommentL();
 		
-		comment_density = (2 * comment_l) / (g * (g - 1));
+		comment_density = (double)((2.0 * comment_l) / (g * (g - 1.0)));
 		return comment_density;
 	}
 	
@@ -103,7 +123,53 @@ public class network {
 		calculateG();
 		calculateLikeL();
 		
-		like_density = (2 * like_l) / (g * (g - 1));
+		like_density = (2.0 * like_l) / (g * (g - 1.0));
 		return like_density;
+	}
+	
+	public void calculateCommentCentrality(){
+		String currentNode;
+		int counter = 0;
+		for(node n : nodes){
+			currentNode = n.getName();
+			for(nodeLink l : links){
+				if(l.getName1() == currentNode || l.getName2() == currentNode){
+					if(l.getComments() > 0) counter++;
+				}
+			}
+			n.setCommentCentrality(counter);
+			counter = 0;
+		}
+	}
+	
+	public boolean isCentralCommentNode(node target){
+		int max = target.getCommentCentrality();
+		for(node n : nodes){
+			if(n.getCommentCentrality() > max) return false;
+		}
+		return true;
+	}
+	
+	public void calculateLikeCentrality(){
+		String currentNode;
+		int counter = 0;
+		for(node n : nodes){
+			currentNode = n.getName();
+			for(nodeLink l : links){
+				if(l.getName1() == currentNode || l.getName2() == currentNode){
+					if(l.getLikes() > 0) counter++;
+				}
+			}
+			n.setLikeCentrality(counter);
+			counter = 0;
+		}
+	}
+	
+	public boolean isCentralLikeNode(node target){
+		int max = target.getLikeCentrality();
+		for(node n : nodes){
+			if(n.getLikeCentrality() > max) return false;
+		}
+		return true;
 	}
 }

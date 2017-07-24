@@ -108,7 +108,7 @@
     <! <div id="result"> </div>
 
     <p id=title> Graph Title Here </p>
-    <svg width="960" height="600"></svg>
+    <svg width="960" height="650"></svg>
     <script>
         var select;
         window.onload = function () {
@@ -151,15 +151,18 @@
             //Creates a force simulation
             var simulation = d3.forceSimulation()
                 .force("link", d3.forceLink().id(function (d) { return d.id; }))
-                .force("charge", d3.forceManyBody().strength(-5000))
+                .force("charge", d3.forceManyBody().strength(-5500))
                 .force("center", d3.forceCenter(width / 2, height / 2));
 
             //reads the JSON file
             d3.json("d3_files/" + filename + ".json", function (error, graph) {
                 if (error) throw error;
 
-                //display network density
+                //display info
                 document.getElementById("dens").innerHTML = graph.info[0].value;
+                document.getElementById("l").innerHTML = graph.info[1].value;
+                document.getElementById("g").innerHTML = graph.info[2].value;
+                document.getElementById("central").innerHTML = graph.info[3].value;
 
                 //sets up the "links" between the nodes
                 var link = svg.append("g")
@@ -229,6 +232,9 @@
             }
       }
     </script>
-    <p>Density of Network: <a id=dens>-1</a></p>
+    <p>Density of Network (&Delta;): <a id=dens>-1</a></p>
+    <p>Number of Links (<i>l</i>): <a id=l>-1</a></p>
+    <p>Number of Nodes (<i>g</i>): <a id=g>-1</a></p>
+    <p>Central Node Value: <a id=central>-1</a></p>
 </body>
 </html>
