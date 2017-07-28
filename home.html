@@ -142,7 +142,8 @@
                 height = +svg.attr("height");
 
             //Sets a color scale
-            var color = d3.scaleOrdinal(d3.schemeCategory10); //!!changed to 10 so 2nd color is orange
+            var color = d3.scaleOrdinal(d3.schemeCategory10)
+                        .domain(["1", "2"]); //!!changed to 10 so 2nd color is orange
 
             var strokeColor = d3.scaleLinear()
                 .domain([0, 1, 20])
