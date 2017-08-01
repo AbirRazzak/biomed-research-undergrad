@@ -17,6 +17,8 @@ public class network {
 	int g;
 	int comment_l;
 	int like_l;
+	double avg_comment_degree;
+	double avg_like_degree;
 	/**
 	 * 
 	 */
@@ -29,6 +31,8 @@ public class network {
 		g = 0;
 		comment_l = 0;
 		like_l = 0;
+		avg_comment_degree = 0;
+		avg_like_degree = 0;
 	}
 	public void addNode(node n){
 		nodes.add(n);
@@ -171,5 +175,35 @@ public class network {
 			if(n.getLikeCentrality() > max) return false;
 		}
 		return true;
+	}
+	
+	public double calcAvgCommentDegree(){
+		double avgDegree = 0;
+		
+		calculateCommentCentrality();
+		for(node n : nodes){
+			avgDegree += n.getCommentCentrality();
+		}
+		
+		calculateG();
+		avgDegree /= (g * 1.0);
+		
+		avg_comment_degree = avgDegree;
+		return avgDegree;
+	}
+	
+	public double calcAvgLikeDegree(){
+		double avgDegree = 0;
+		
+		calculateCommentCentrality();
+		for(node n : nodes){
+			avgDegree += n.getLikeCentrality();
+		}
+		
+		calculateG();
+		avgDegree /= (g * 1.0);
+		
+		avg_like_degree = avgDegree;
+		return avgDegree;
 	}
 }

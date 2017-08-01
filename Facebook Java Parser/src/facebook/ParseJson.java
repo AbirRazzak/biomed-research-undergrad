@@ -464,7 +464,7 @@ public static void runProgram(String FILENAME){
 			density.put("value", NETWORK.calculateCommentDensity());
 			listInfo.put(density); //store density into 'info' JSONArray
 			
-			JSONObject l = new JSONObject();
+		/*	JSONObject l = new JSONObject();
 			l.put("id", "l");
 			l.put("value", NETWORK.getCommentL());
 			listInfo.put(l);
@@ -472,7 +472,13 @@ public static void runProgram(String FILENAME){
 			JSONObject g = new JSONObject();
 			g.put("id", "g");
 			g.put("value", NETWORK.getG());
-			listInfo.put(g);
+			listInfo.put(g); 	*/
+			
+			JSONObject avgDegree = new JSONObject();
+			avgDegree.put("id", "Average Degree");
+				double avgD = NETWORK.calcAvgCommentDegree();
+			avgDegree.put("value", avgD);
+			listInfo.put(avgDegree);
 			
 			JSONObject central = new JSONObject();
 			central.put("id", "Central Value");
@@ -534,7 +540,7 @@ public static void runProgram(String FILENAME){
 		density.put("value", NETWORK.calculateLikeDensity());
 		listInfo.put(density); //store density into 'info' JSONArray
 		
-		JSONObject l = new JSONObject();
+	/*	JSONObject l = new JSONObject();
 		l.put("id", "l");
 		l.put("value", NETWORK.getLikeL());
 		listInfo.put(l);
@@ -542,7 +548,13 @@ public static void runProgram(String FILENAME){
 		JSONObject g = new JSONObject();
 		g.put("id", "g");
 		g.put("value", NETWORK.getG());
-		listInfo.put(g);
+		listInfo.put(g);	*/
+		
+		JSONObject avgDegree = new JSONObject();
+		avgDegree.put("id", "Average Degree");
+			double avgD = NETWORK.calcAvgLikeDegree();
+		avgDegree.put("value", avgD);
+		listInfo.put(avgDegree);
 		
 		JSONObject central = new JSONObject();
 		central.put("id", "Central Value");
