@@ -104,6 +104,7 @@
 
     <button onclick="resetPage()">Reset</button>
     <button onclick="clearSVG()">Clear</button>
+    <button onclick="openREADME()">README</button>
 
     <!-- <div id="result"> </div> -->
 
@@ -133,6 +134,10 @@
 
         function clearSVG(){
           d3.selectAll("svg > *").remove();
+        }
+
+        function openREADME(){
+          window.location.href = "README.html";
         }
 
         function load(filename){
